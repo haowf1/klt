@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdk
+    buildToolsVersion rootProject.ext.buildTools
+
+    lintOptions {
+        abortOnError false
+    }
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdk
+        targetSdkVersion rootProject.ext.targetSdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile(name: 'ijkplayer-java-release', ext: 'aar')
+    compile(name: 'ijkplayer-armv5-release', ext: 'aar')
+    compile(name: 'ijkplayer-armv7a-release', ext: 'aar')
+    compile(name: 'ijkplayer-x86-release', ext: 'aar')
+    compile(name: 'ijkplayer-exo-release', ext: 'aar')
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${rootProject.ext.kotlin_version}"
+    compile 'com.android.support:appcompat-v7:${rootProject.ext.support}'
+    compile "com.android.support:design:${rootProject.ext.support}"
+    testCompile 'junit:junit:4.12'
+    compile project(':RecyclerViewHelper')
+}

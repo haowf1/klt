@@ -1,0 +1,1 @@
+include ':app', ':hw.permissionapply', ':RecyclerViewHelper', ':tinkerLib', ':downloaderLib', ':ktlplayer', ':ifmsc'
