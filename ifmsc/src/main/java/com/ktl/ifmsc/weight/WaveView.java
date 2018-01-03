@@ -64,32 +64,29 @@ public class WaveView extends View {
 
     public WaveView(Context context) {
         super(context);
-        init(context);
+//        init(context);
     }
 
     public WaveView(Context context, AttributeSet attributeSet){
         super(context,attributeSet);
-        init(context);
+        TypedArray array = context.obtainStyledAttributes(attributeSet, R.styleable.WaveView);
+        waveAmount = array.getInteger( R.styleable.WaveView_waveAmount,4);
+        waveHeight = array.getFloat( R.styleable.WaveView_waveHeight,0.3f);
+        waveWidth = array.getFloat( R.styleable.WaveView_waveWidth,5f);
+        waveColor = array.getColor( R.styleable.WaveView_waveColor, Color.WHITE);
+        waveOffsetX= array.getInteger( R.styleable.WaveView_waveOffsetX,0);
+        waveSpeed = array.getFloat( R.styleable.WaveView_waveSpeed,0.4f);
+//        init(context);
     }
 
     public WaveView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.WaveView);
-        try {
-            waveAmount = array.getInteger( R.styleable.WaveView_waveAmount,4);
-            waveHeight = array.getFloat( R.styleable.WaveView_waveHeight,0.5f);
-            waveWidth = array.getFloat( R.styleable.WaveView_waveWidth,5f);
-            waveColor = array.getColor( R.styleable.WaveView_waveColor, Color.WHITE);
-            waveOffsetX= array.getInteger( R.styleable.WaveView_waveOffsetX,0);
-            waveSpeed = array.getFloat( R.styleable.WaveView_waveSpeed,0.4f);
 
-        } finally {
 
-        }
-        init(context);
+//        init(context);
     }
 
-    private void init(Context context){
+    public void init(Context context){
         paint = new Paint();
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
@@ -97,13 +94,16 @@ public class WaveView extends View {
         waveSpeed = 0.1f;
         waveOffsetX = 0f;
         waveAmount = 4;
-        waveColor = Color.rgb(39, 188, 136);
+        waveColor = Color.WHITE;
         waveHeight = 1f;
-        targetHeight = 1f;
+        targetHeight = 0f;
         waveWidth = 5f;
         thread = new Thread(runnable);
         thread.start();
+    }
 
+    public void stop(){
+        thread.interrupt();
     }
 
     private Handler handler = new Handler() {
@@ -132,6 +132,8 @@ public class WaveView extends View {
                     } else {
                         waveHeight -= 0.01f;
                     }
+
+
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

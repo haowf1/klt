@@ -344,6 +344,7 @@ public class RippleView extends RelativeLayout {
         return output;
     }
 
+
     /**
      * Set Ripple color, default is #FFFFFF
      *

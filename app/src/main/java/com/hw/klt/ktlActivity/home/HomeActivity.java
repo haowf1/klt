@@ -1,6 +1,7 @@
 package com.hw.klt.ktlActivity.home;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -11,11 +12,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +41,7 @@ import com.hw.klt.util.GlideCircleTransform;
 import com.hw.klt.util.HeadImageviewSetting;
 import com.hw.klt.util.camera.CropImageUtils;
 import com.hw.klt.util.camera.PermissionValue;
+import com.hw.klt.widget.dialog.waveDialog;
 import com.ktl.ifmsc.NlpManager;
 import com.ktl.ifmsc.NlpManager.NlpListener;
 
@@ -99,7 +105,12 @@ public class HomeActivity extends BaseActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
+            //设置dialog大小，这里是一个小赠送，模块好的控件大小设置
 
+            waveDialog mWaveDailog = new waveDialog(HomeActivity.this,R.style.wavedialog);
+
+//            mWaveDailog.getWindow().setAttributes(lp);
+            mWaveDailog.show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

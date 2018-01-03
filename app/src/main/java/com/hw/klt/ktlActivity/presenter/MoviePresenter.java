@@ -223,6 +223,9 @@ public class MoviePresenter implements IBasePresenter {
                 public List<VideoMultiItem> call(MovieHomeInfo movieHomeInfo) {
                     for (int i = 0; i < movieHomeInfo.mvideoInfos.size(); i++) {
                         mVideoItem.add(new VideoMultiItem(VideoMultiItem.ITEM_TYPE_MOVIE, movieHomeInfo.mvideoInfos.get(i)));
+                        if (i == 2){
+                            mVideoItem.add(new VideoMultiItem(VideoMultiItem.ITEM_TYPE_AD,null));
+                        }
                     }
                     return mVideoItem;
                 }

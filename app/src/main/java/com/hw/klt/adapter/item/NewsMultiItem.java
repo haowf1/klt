@@ -12,7 +12,7 @@ public class NewsMultiItem extends MultiItemEntity {
 
     public static final int ITEM_TYPE_NORMAL = 1;
     public static final int ITEM_TYPE_PHOTO_SET = 2;
-
+    public static final int ITEM_TYPE_AD = 3;
     private NewsInfo mNewsBean;
 
     public NewsMultiItem(@NewsItemType int itemType, NewsInfo newsBean) {

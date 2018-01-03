@@ -3,6 +3,7 @@ package com.hw.klt.widget.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
@@ -14,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.hw.klt.R;
+import com.ktl.ifmsc.weight.WaveView;
 
 import java.util.zip.Inflater;
 
@@ -22,13 +24,16 @@ import java.util.zip.Inflater;
  */
 
 public class waveDialog extends Dialog {
+    public WaveView mWaveview;
+
+    public Context mContext;
     public waveDialog(@NonNull Context context) {
         super(context);
         init(context);
     }
 
     public waveDialog(@NonNull Context context, @StyleRes int themeResId) {
-        super(context, themeResId);
+        super(context,themeResId);
         init(context);
     }
 
@@ -37,18 +42,38 @@ public class waveDialog extends Dialog {
         init(context);
     }
 
-    public void init(Context context){
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_wave, null);
-        //设置dialog大小，这里是一个小赠送，模块好的控件大小设置
-        Window dialogWindow = getWindow();
-        WindowManager manager = ((Activity) context).getWindowManager();
-        WindowManager.LayoutParams params = dialogWindow.getAttributes();
-        // 获取对话框当前的参数值
-        dialogWindow.setGravity(Gravity.CENTER);
-        //设置对话框位置
-        Display d = manager.getDefaultDisplay();
-        // 获取屏幕宽、高度
-        params.width = (int) (d.getWidth() * 0.8); // 宽度设置为屏幕的0.65，根据实际情况调整 dialogWindow.setAttributes(params);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
+    public void init(Context context){
+        mContext = context;
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_wave, null);
+        mWaveview = (WaveView) view.findViewById(R.id.waveview);
+
+//        WindowManager windowManager = ((Activity)context).getWindowManager();
+//        Display display = windowManager.getDefaultDisplay();
+//        WindowManager.LayoutParams lp = getWindow().getAttributes();
+//        lp.width = (int)(display.getWidth()); //设置宽度
+        setContentView(view);
+    }
+
+    @Override
+    public void show() {
+        super.show();
+        mWaveview.init(mContext);
+        Window window = this.getWindow();
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.width = WindowManager.LayoutParams.FILL_PARENT;
+        lp.height = WindowManager.LayoutParams.FILL_PARENT;
+        window.setAttributes(lp);
+        window.getDecorView().setPadding(0, 0, 0, 0);
+    }
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        mWaveview.stop();
     }
 }

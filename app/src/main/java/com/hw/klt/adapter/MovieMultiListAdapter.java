@@ -46,7 +46,7 @@ public class MovieMultiListAdapter extends BaseMultiItemQuickAdapter<VideoMultiI
     @Override
     protected void attachItemType() {
         addItemType(VideoMultiItem.ITEM_TYPE_MOVIE, R.layout.adapter_news_list);
-//        addItemType(VideoMultiItem.ITEM_TYPE_PHOTO_SET, R.layout.adapter_news_photo_set);
+        addItemType(VideoMultiItem.ITEM_TYPE_AD, R.layout.adapter_ad_scroll);
     }
 
     @Override
@@ -55,10 +55,29 @@ public class MovieMultiListAdapter extends BaseMultiItemQuickAdapter<VideoMultiI
             case NewsMultiItem.ITEM_TYPE_NORMAL:
                 _handleNewsNormal(holder, item.getVideoBean());
                 break;
-            case NewsMultiItem.ITEM_TYPE_PHOTO_SET:
-//                _handleNewsPhotoSet(holder, item.getNewsBean());
+            case NewsMultiItem.ITEM_TYPE_AD:
+                _handleNewsAD(holder);
                 break;
         }
+    }
+
+    private void _handleNewsAD(BaseViewHolder holder) {
+        ImageView movieAD = holder.getView(R.id.movie_ad);
+        movieAD.setImageResource(R.mipmap.ad);
+
+        // 波纹效果
+//        RippleView rippleLayout = holder.getView(R.id.item_ripple);
+//        rippleLayout.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+//            @Override
+//            public void onComplete(RippleView rippleView) {
+//
+////                Intent intent= new Intent();
+////                intent.setAction("android.intent.action.VIEW");
+////                Uri content_url = Uri.parse(RetrofitService.MOVIE_DATA+item.getVideodetiale());
+////                intent.setData(content_url);
+////                mContext.startActivity(intent);
+//            }
+//        });
     }
 
     /**

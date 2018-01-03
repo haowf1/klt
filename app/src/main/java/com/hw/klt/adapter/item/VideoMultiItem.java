@@ -18,6 +18,7 @@ public class VideoMultiItem extends MultiItemEntity {
     public static final int ITEM_TYPE_MOVIE = 1;
     public static final int ITEM_TYPE_TV = 2;
     public static final int ITEM_TYPE_VARIETY = 3;
+    public static final int ITEM_TYPE_AD = 4;
     private VideoInfo mVideoBean;
 
     public VideoMultiItem(@VideoMultiItem.VideoItemType int itemType, VideoInfo videoBean) {
@@ -38,8 +39,7 @@ public class VideoMultiItem extends MultiItemEntity {
         super.setItemType(itemType);
     }
 
-
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({ITEM_TYPE_MOVIE, ITEM_TYPE_TV,ITEM_TYPE_VARIETY})
+    @IntDef({ITEM_TYPE_MOVIE, ITEM_TYPE_TV,ITEM_TYPE_VARIETY,ITEM_TYPE_AD})
     public @interface VideoItemType {}
 }

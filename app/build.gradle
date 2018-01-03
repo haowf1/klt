@@ -131,6 +131,7 @@ dependencies {
     compile 'org.jsoup:jsoup:1.10.3'
     compile project(path: ':ifmsc')
     compile project(path: ':ifmsc')
+
 }
 
 apply from: 'tinker_build.gradle'
